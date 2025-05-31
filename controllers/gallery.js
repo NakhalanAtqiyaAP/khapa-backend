@@ -3,7 +3,7 @@ const galleryModel = require('../models/gallery');
 const upload = require('../multerConfig');
 
 exports.createGallery = [
-  upload.single('gallery'), // Handle single file upload with field name 'img'
+  upload.single('gallery'),
   body('text').notEmpty().withMessage('Text tidak boleh kosong'),
   body('user_id').notEmpty().withMessage('User ID tidak boleh kosong'),
 
@@ -128,7 +128,7 @@ exports.getGalleryById = (req, res) => {
 };
 
 exports.updateGallery = [
-  upload.single('img'), // Handle single file upload
+  upload.single('img'),
   body('text').optional(),
   body('user_id').optional(),
 
@@ -148,7 +148,6 @@ exports.updateGallery = [
       user_id: req.body.user_id
     };
 
-    // Only add image if file was uploaded
     if (req.file) {
       galleryData.img = req.file.filename;
     }
