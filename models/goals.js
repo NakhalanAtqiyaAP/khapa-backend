@@ -1,13 +1,13 @@
 module.exports.createGoal = (db, goalData, callback) => {
     const sql = `
-      INSERT INTO goal (
+      INSERT INTO goals (
      date, text, user_id
       ) 
       VALUES (?, ?, ?)
     `;
     const values = [
      goalData.date,
-     goalData.img,
+     goalData.text,
      goalData.user_id
     ];
   
@@ -20,7 +20,7 @@ module.exports.createGoal = (db, goalData, callback) => {
   };
   
 module.exports.getGoal = (db, callback) => {
-    const sql = `SELECT * FROM goal `;
+    const sql = `SELECT * FROM goals `;
     db.query(sql, (err, results) => {
       if (err) {
         return callback(err, null);
@@ -33,7 +33,7 @@ module.exports.getGoal = (db, callback) => {
   };
   
   module.exports.getGoalById = (db, id, callback) => {
-    const sql = `SELECT * FROM goal WHERE id = ?`;
+    const sql = `SELECT * FROM goals WHERE id = ?`;
     db.query(sql, [id], (err, results) => {
       if (err) {
         return callback(err, null);
@@ -46,7 +46,7 @@ module.exports.getGoal = (db, callback) => {
   };
   
   module.exports.updateGoal = (db, id, goalData, callback) => {
-    const sql = `UPDATE goal SET date = ?, img = ?, user_id = ?, WHERE id = ?`;
+    const sql = `UPDATE goals SET date = ?, img = ?, user_id = ?, WHERE id = ?`;
     const values = [
       goalData.date,
       goalData.img,
@@ -62,7 +62,7 @@ module.exports.getGoal = (db, callback) => {
   
 
   module.exports.deleteGoal = (db, id, callback) => {
-    const sql = `DELETE FROM goal WHERE id = ?`;
+    const sql = `DELETE FROM goals WHERE id = ?`;
     db.query(sql, [id], (err, result) => {
         if (err) {
             return callback(err, null);

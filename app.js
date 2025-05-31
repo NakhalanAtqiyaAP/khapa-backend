@@ -13,7 +13,10 @@ const port = process.env.PORT || 8000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors()); 
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
 
 const dbOptions = {
   host: process.env.DB_HOST,
@@ -26,10 +29,12 @@ const dbOptions = {
 app.use(myConnection(mysql, dbOptions, 'single'));
 
 const apiRoutes = require('./routes/api');
+const authRoutes = require('./routes/auth');
 
-app.use('/uploads', express.static(path.join(__dirname, 'img')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/', apiRoutes);
+app.use('/auth/', middleware, authRoutes);
 
 app.listen(port, () => {
   console.log(`App running at http://localhost:${port}`);

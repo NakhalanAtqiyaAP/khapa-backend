@@ -46,11 +46,10 @@ module.exports.getArticle = (db, callback) => {
   };
   
   module.exports.updateArticle = (db, id, articleData, callback) => {
-    const sql = `UPDATE articles SET judul = ?, text = ?, user_id = ? WHERE id = ?`;
+    const sql = `UPDATE articles SET judul = ?, text = ?, WHERE id = ?`;
     const values = [
       articleData.judul,
       articleData.text,
-      articleData.user_id,
       id
     ];
   

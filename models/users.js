@@ -45,8 +45,8 @@
     });
   };
   
-  module.exports.getUserByEmail = (db, username, callback) => {
-    const sql = `SELECT * FROM users WHERE email = ?`;
+  module.exports.getUserByUsername = (db, username, callback) => {
+    const sql = `SELECT * FROM users WHERE username = ?`;
     db.query(sql, [username], (err, results) => {
       if (err) {
         return callback(err, null);
@@ -59,7 +59,7 @@
   };
   
   module.exports.updateUser = (db, id, userData, callback) => {
-    const sql = `UPDATE users SET email = ?, password = ?, role = ? WHERE id = ?`;
+    const sql = `UPDATE users SET username = ?, password = ?, img_profile = ? WHERE id = ?`;
     const values = [
       userData.username,
       userData.password,
